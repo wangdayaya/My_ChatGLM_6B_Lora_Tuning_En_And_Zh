@@ -1,15 +1,22 @@
-# int8
+# 原作者
 bitsandbytes==0.37.1
 accelerate==0.17.1
-
-# chatglm
 protobuf>=3.19.5,<3.20.1
 transformers==4.27.1
 icetk
 cpm_kernels==1.0.11
 torch>=1.13.1
 tensorboard
-
-# 
 datasets==2.10.1
 git+https://github.com/huggingface/peft.git  # 最新版本 >=0.3.0.dev0
+
+# 我的
+accelerate==0.18.0
+bitsandbytes==0.37.5  # 这个可能在 win 上不行，安装这个 git+https://github.com/Keith-Hon/bitsandbytes-windows.git
+protobuf==3.19.6
+transformers==4.27.1
+icetk==0.0.4
+cpm_kernels==1.0.11
+torch==1.13.1+cu116
+datasets==2.11.0
+peft==0.2.0

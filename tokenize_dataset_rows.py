@@ -25,7 +25,7 @@ def read_jsonl(path, max_seq_length, skip_overlength=False):
         model_name, trust_remote_code=True)
     config = transformers.AutoConfig.from_pretrained(
         model_name, trust_remote_code=True, device_map='auto')
-    with open(path, "r") as f:
+    with open(path, "r", encoding='utf-8') as f:
         for line in tqdm(f.readlines()):
             example = json.loads(line)
             feature = preprocess(tokenizer, config, example, max_seq_length)
@@ -37,7 +37,7 @@ def read_jsonl(path, max_seq_length, skip_overlength=False):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--jsonl_path", type=str, default="data/alpaca_data.jsonl")
+    parser.add_argument("--jsonl_path", type=str, default="data/alpaca_data_en.jsonl")
     parser.add_argument("--save_path", type=str, default="data/alpaca")
     parser.add_argument("--max_seq_length", type=int, default=384)
     parser.add_argument("--skip_overlength", type=bool, default=False)

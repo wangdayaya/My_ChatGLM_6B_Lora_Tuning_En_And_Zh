@@ -14,14 +14,14 @@ def format_example(example: dict) -> dict:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_path", type=str, default="data/alpaca_data.json")
-    parser.add_argument("--save_path", type=str, default="data/alpaca_data.jsonl")
+    parser.add_argument("--data_path", type=str, default="data/alpaca_data_en.json")
+    parser.add_argument("--save_path", type=str, default="data/alpaca_data_en.jsonl")
 
     args = parser.parse_args()
-    with open(args.data_path) as f:
+    with open(args.data_path, 'r', encoding="utf-8") as f:
         examples = json.load(f)
 
-    with open(args.save_path, 'w') as f:
+    with open(args.save_path, 'w', encoding="utf-8") as f:
         for example in tqdm(examples, desc="formatting.."):
             f.write(json.dumps(format_example(example)) + '\n')
 

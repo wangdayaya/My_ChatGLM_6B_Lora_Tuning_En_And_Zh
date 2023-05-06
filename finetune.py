@@ -1,3 +1,4 @@
+from peft import LoraConfig, get_peft_model, TaskType
 from transformers.integrations import TensorBoardCallback
 from torch.utils.tensorboard import SummaryWriter
 from transformers import TrainingArguments
@@ -5,7 +6,6 @@ from transformers import Trainer, HfArgumentParser
 from transformers import AutoTokenizer, AutoModel
 import torch
 import torch.nn as nn
-from peft import get_peft_model, LoraConfig, TaskType
 from dataclasses import dataclass, field
 import datasets
 import os
@@ -17,7 +17,7 @@ tokenizer = AutoTokenizer.from_pretrained("THUDM/chatglm-6b", trust_remote_code=
 @dataclass
 class FinetuneArguments:
     dataset_path: str = field(default="data/alpaca")
-    model_path: str = field(default="output")
+    model_path: str = field(default="en")
     lora_rank: int = field(default=8)
 
 
@@ -93,6 +93,7 @@ def main():
         r=finetune_args.lora_rank,
         lora_alpha=32,
         lora_dropout=0.1,
+        target_modules=["query_key_value"]
     )
     model = get_peft_model(model, peft_config)
 
